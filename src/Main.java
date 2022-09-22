@@ -1,6 +1,9 @@
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Main {
     public static void main(String[] args) {
-        check("", ")fskfjsf", "sfanksf");
+        check("afasawfas@", ")fskfjsf", "sfanksf");
     }
     public static void check(String login, String password, String confirmPassword) {
         try {
@@ -25,9 +28,16 @@ public class Main {
             System.out.println("Проверка поролей на совпадение завершена");
         }
     }
-    public static void checkLogin(String login) throws WrongLoginException{
+    public static void checkLogin(String login) throws WrongLoginException {
+        //Я черт знает, что я тут напечатал... работать должен, да вот ленится.
+        String regex = "^[a-zA-Z_0-9]";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(login);
+
         if (login.length() >= 20 || login == "" || login == null) {
             throw new WrongLoginException("Длина логина не соответствует требованиям") ;
+        } else if (matcher.matches()) {
+            throw new WrongLoginException("Символы логина не соответствуют требованиям");
         }
     }
     public static void checkPassword(String password) throws WrongPasswordException{
