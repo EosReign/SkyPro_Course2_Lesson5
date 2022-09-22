@@ -40,5 +40,5 @@ public class Main {
             throw new WrongPasswordException("Пороль не совпадает");
         }
     }
-
 }
+//..
