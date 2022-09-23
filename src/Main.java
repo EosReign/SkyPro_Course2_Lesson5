@@ -2,10 +2,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Main {
-    private static String regex = "\\w+[a-zA-Z_0-9]";
-    private static Pattern pattern = Pattern.compile(regex);
+    private static final String regex = "\\w+[a-zA-Z_0-9]";
+    private static final Pattern pattern = Pattern.compile(regex);
     public static void main(String[] args) {
-        check("afasawfas@", ")fskfjsf", "sfanksf");
+        check("afasawfas@", "@fskfjsf", "sfanksf");
     }
     public static void check(String login, String password, String confirmPassword) {
         try {
@@ -23,16 +23,16 @@ public class Main {
     public static void checkLogin(String login) throws WrongLoginException {
         Matcher matcher = pattern.matcher(login);
 
-        if (login == null || login == "" || login.length() >= 20) {
+        if (login == null || login.equals("") || login.length() >= 20) {
             throw new WrongLoginException("Длина логина не соответствует требованиям") ;
         } else if (!matcher.matches()) {
             throw new WrongLoginException("Символы логина не соответствуют требованиям");
         }
     }
-    public static void checkPassword(String password) throws WrongPasswordException{
+    public static void checkPassword(String password) throws WrongPasswordException {
         Matcher matcher = pattern.matcher(password);
 
-        if (password == null || password == "" || password.length() >= 20) {
+        if (password == null || password.equals("") || password.length() >= 20) {
             throw new WrongPasswordException("Длина пороля не соответствует требованиям");
         } else if (!matcher.matches()) {
             throw new WrongPasswordException("Символы пороля не соответствуют требованиям");
